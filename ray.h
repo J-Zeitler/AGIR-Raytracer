@@ -1,7 +1,7 @@
 #ifndef RAY_H
 #define RAY_H
 
-#include "lib/glm/glm/glm.hpp"
+#include <glm/glm.hpp>
 
 class Ray
 {

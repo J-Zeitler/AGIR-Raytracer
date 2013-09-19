@@ -3,7 +3,8 @@
 
 //default constructor -> 512 x 512 image
 Image::Image(){
-    imageData = new float [ 512 * 512 * 3 ];
+    width = 512; height = 512;
+    imageData = new float [ width * height * 3 ];
 }
 
 Image::Image(const int &w, const int &h) : width(w), height(h) {

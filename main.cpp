@@ -1,12 +1,13 @@
 #include <iostream>
 
-#include "lib/glm/glm/glm.hpp"
-#include "lib/glm/glm/ext.hpp"
-#include "lib/glm/glm/gtx/constants.hpp"
+#include <glm/glm.hpp>
+//#include <glm/ext.hpp>
+//#include <glm/gtx/constants.hpp>
 
 #include "colorrgb.h"
 #include "image.h"
 #include "ray.h"
+#include "boundingbox.h"
 
 using namespace std;
 
@@ -16,18 +17,18 @@ int main()
     int imgHeight = 400;
 
     Image image = Image(imgWidth, imgHeight);
-    ColorRGB *color = new ColorRGB();
+    ColorRGB color = ColorRGB();
 
     for( int y = 0;  y < imgHeight; ++y ) {
         for( int x = 0; x < imgWidth; ++x ) {
-            color->r = x / ((float) imgWidth);
-            color->g = y / ((float) imgHeight);
-            color->b = abs(sin(y / 20)) * abs(cos(x / 17));
-            image.setPixel(x, y, color);
+            color.r = x / ((float) imgWidth);
+            color.g = y / ((float) imgHeight);
+            color.b = abs(sin(y / 20)) * abs(cos(x / 17));
+            image.setPixel(x, y, &color);
         }
     }
 
-    image.saveToPPM("./test.ppm");
+    image.saveToPPM("./test.ppm");    
 
     return 0;
 }
