@@ -6,6 +6,7 @@
 
 #include "colorrgb.h"
 #include "image.h"
+#include "ray.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ int main()
         for( int x = 0; x < imgWidth; ++x ) {
             color->r = x / ((float) imgWidth);
             color->g = y / ((float) imgHeight);
-            color->b = abs(sin(sqrt(x + y)));
+            color->b = abs(sin(y / 20)) * abs(cos(x / 17));
             image.setPixel(x, y, color);
         }
     }
