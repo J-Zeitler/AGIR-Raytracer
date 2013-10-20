@@ -8,14 +8,14 @@ Image::Image(){
 }
 
 Image::Image(const int &w, const int &h) : width(w), height(h) {
-        imageData = new float [ w * h * 3 ];
+    imageData = new float [ w * h * 3 ];
 }
 
 Image::~Image() {
     delete [] imageData;
 }
 
-void Image::setPixel(const int &x, const int &y, const ColorRGB *pixelValues) {
+void Image::setPixel(int &x, int &y, ColorRGB *pixelValues) {
     imageData[(y * width + x) * 3] = pixelValues->r;
     imageData[(y * width + x) * 3 + 1] = pixelValues->g;
     imageData[(y * width + x) * 3 + 2] = pixelValues->b;
@@ -36,4 +36,20 @@ void Image::saveToPPM(const char *filename) {
             }
         }
         ofs.close();
+}
+
+int Image::getHeight() const {
+    return height;
+}
+
+void Image::setHeight(int value) {
+    height = value;
+}
+
+int Image::getWidth() const {
+    return width;
+}
+
+void Image::setWidth(int value) {
+    width = value;
 }

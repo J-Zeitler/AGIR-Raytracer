@@ -3,9 +3,8 @@
 Ray::Ray() {}
 
 Ray::Ray(glm::vec3 o, glm::vec3 d, float near, float far) {
-    origin = o; dir = d; tMin = near; tMax = far;
+    origin = o; dir = glm::normalize(d); tMin = near; tMax = far;
 }
-
 
 float Ray::getTMax() const {
     return tMax;

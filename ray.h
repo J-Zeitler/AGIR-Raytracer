@@ -7,7 +7,7 @@ class Ray
 {
 public:
     Ray();
-    Ray(glm::vec3 o, glm::vec3 d, float near, float far);
+    Ray(glm::vec3 o, glm::vec3 d, float near = 1, float far = 100);
 
     glm::vec3 operator() (const float &t);
 
@@ -17,7 +17,6 @@ public:
     glm::vec3 getDir() const;
     void setDir(const glm::vec3 &value);
 
-    
     float getTMin() const;
     void setTMin(float value);
     

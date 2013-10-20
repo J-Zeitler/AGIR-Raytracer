@@ -13,9 +13,15 @@ public:
 
     ~Image();
 
-    void setPixel(const int &x, const int &y, const ColorRGB *pixelValues);
+    void setPixel(int &x, int &y, ColorRGB *pixelValues);
     void saveToPPM(const char *filename);
 
+    int getWidth() const;
+    void setWidth(int value);
+    
+    int getHeight() const;
+    void setHeight(int value);
+    
 private:
     float *imageData;
     int width, height;
