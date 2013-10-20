@@ -1,9 +1,11 @@
 #include "sceneobject.h"
 
-SceneObject::SceneObject(const glm::mat4 &ltw) {
+SceneObject::SceneObject(const glm::mat4 &ltw, ColorRGB c) {
     localToWorld = ltw;
     worldToLocal = glm::inverse(ltw);
-    color = ColorRGB(1.0, 0.0, 0.0);
+    color = c;
+    
+    position = glm::vec3(ltw * glm::vec4(0, 0, 0, 1)); //poor mans swizzling
 }
 
 glm::mat4 SceneObject::getWorldToLocal() const {

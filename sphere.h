@@ -6,13 +6,13 @@
 class Sphere : public SceneObject
 {
 public:
-    Sphere(const glm::mat4 &ltw, const float &r);
+    Sphere(const glm::mat4 &ltw, ColorRGB c, const float &r);
     ~Sphere();
     
-    bool intersects(const Ray &r);
+    Intersection* intersects(Ray &r);
     
 private:
-    float radius, radiusSq; 
+    float radius, radiusSq;
 };
 
 #endif // SPHERE_H

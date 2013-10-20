@@ -8,6 +8,9 @@ public:
     ColorRGB(float red, float green, float blue);
     
     void setColor(float red, float green, float blue);
+    void setColor(ColorRGB c);
+    
+    ColorRGB operator*(float f);
     
     float r, g, b;
 };

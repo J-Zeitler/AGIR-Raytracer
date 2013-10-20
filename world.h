@@ -19,6 +19,7 @@ public:
     std::vector<PointLight*> *pointLights;
     ColorRGB ambientColor, backgroundColor;
     bool backgroundEnabled;
+    float near, far;
     
 };
 

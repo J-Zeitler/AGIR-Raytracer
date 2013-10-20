@@ -2,18 +2,21 @@
 #define SCENEOBJECT_H
 
 #include <glm/glm.hpp>
+#include <glm/ext.hpp>
 #include "ray.h"
 #include "colorrgb.h"
+#include "intersection.h"
 
 class SceneObject
 {
 public:
-    SceneObject(const glm::mat4 &ltw);
-    virtual ~SceneObject() {}
+    SceneObject(const glm::mat4 &ltw, ColorRGB c);
+    ~SceneObject() {}
     
-    virtual bool intersects(const Ray &r) const = 0;
+    virtual Intersection* intersects(Ray &r) = 0;
  
     ColorRGB color;
+    glm::vec3 position;
     
     glm::mat4 getLocalToWorld() const;
     void setLocalToWorld(const glm::mat4 &value);

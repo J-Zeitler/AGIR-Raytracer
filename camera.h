@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtx/constants.hpp>
+#include <algorithm>
 #include "image.h"
 #include "ray.h"
 #include "colorrgb.h"

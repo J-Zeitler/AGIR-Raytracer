@@ -2,30 +2,20 @@
 #define RAY_H
 
 #include <glm/glm.hpp>
+#include <ostream>
 
 class Ray
 {
 public:
     Ray();
-    Ray(glm::vec3 o, glm::vec3 d, float near = 1, float far = 100);
+    Ray(glm::vec3 o, glm::vec3 d, float near = -1, float far = -100);
 
     glm::vec3 operator() (const float &t);
-
-    glm::vec3 getOrigin() const;
-    void setOrigin(const glm::vec3 &value);
     
-    glm::vec3 getDir() const;
-    void setDir(const glm::vec3 &value);
-
-    float getTMin() const;
-    void setTMin(float value);
-    
-    float getTMax() const;
-    void setTMax(float value);
-    
-private:
     glm::vec3 origin, dir;
     float tMin, tMax;
+    
+    friend std::ostream& operator<<(std::ostream &os, const Ray &r);
 };
 
 #endif // RAY_H

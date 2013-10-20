@@ -5,7 +5,7 @@ Camera::Camera() {
     up = glm::vec3(0, 1, 0);
     lookAt = glm::vec3(0, 0, -1);
     fovX = glm::quarter_pi<float>();
-    fovY = fovX * 800 / (float) 600;
+    fovY = fovX * 600.0 / 800.0;
     outputImage = new Image(800, 600);
 }
 
@@ -29,36 +29,44 @@ void Camera::raytrace(World *world) {
     
     int h = outputImage->getHeight();
     int w = outputImage->getWidth();
-    float normX, normY, xx, yy;
+    float xx, yy;
     float zz = -1.0f;
-    ColorRGB *color = new ColorRGB(0.0f, 0.0f, 0.0f);
+    ColorRGB *color = new ColorRGB();
     Ray r;
     
     int numObjects = world->sceneObjects->size();
+//    int numLights = world->pointLights->size();
     
     for(int y = 0; y < h; ++y) {
         for(int x = 0; x < w; ++x) {
-            
-            //normalize x,y → normX, normY € {0, 1}
-            normX = (x + 0.5) / (float) w;
-            normY = (y + 0.5) / (float) h;
-            
-            //remap x,y → xx, yy € {-1, 1}
-            xx = 2 * normX - 1.0;
-            yy = 1.0 - 2 * normY;
+            //map xx and yy to image plane            
+            xx = tan(fovX / 2) * (2 * x - w) / float(w);
+            yy = tan(fovY / 2) * (h - 2 * y) / float(h);
             
             //construct ray
-            r = Ray(this->position, glm::vec3(xx, yy, zz));
+            r = Ray(glm::vec3(0), glm::vec3(xx, yy, zz) - glm::vec3(0));
             
+            //calculate closest intersection
+            Intersection *i = NULL;
             for(int o = 0; o < numObjects; ++o) {
-                
+                Intersection *tmp;
+                SceneObject *obj = world->sceneObjects->at(o);
+                if( tmp = obj->intersects(r) ) {
+                    i = tmp;
+                }
             }
             
-//            color->setColor((xx + 1) / 2.0, (yy + 1) / 2.0, 0.0f);
-            outputImage->setPixel(x, y, &world->backgroundColor);
+            if(i) {
+                PointLight *pl = world->pointLights->at(0);
+                float nDotL = glm::dot(i->surfaceNormal, glm::normalize((pl->position - i->intersectionPoint)));
+                if(nDotL < 0.0) nDotL = 0.0;
+                color->setColor(i->color * nDotL);
+                outputImage->setPixel(x, y, color);
+            } else {
+                outputImage->setPixel(x, y, &world->backgroundColor);
+            }
         }
     }
-    
 }
 
 void Camera::raytraceToFile(World *world, const char *filename) {
