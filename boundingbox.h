@@ -2,8 +2,11 @@
 #define BOUNDINGBOX_H
 
 #include <glm/glm.hpp>
+#include "ray.h"
 
-//Axis Aligned Bounding Box
+/**
+ * Axis aligned bounding box
+ */
 class BoundingBox
 {
 public:
@@ -20,6 +23,9 @@ public:
     
     glm::vec3 getOrigin() const;
     void setOrigin(const glm::vec3 &value);
+    
+    //important to copy ray here!
+    bool intersects(Ray r);
     
 private:
     glm::vec3 min, max, origin;

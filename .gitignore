@@ -7,3 +7,6 @@ cmake_install.cmake
 *.ppm
 *.cproject
 *.project
+.kdev4/
+AGIR-Raytracer
+AGIR-Raytracer.kdev4

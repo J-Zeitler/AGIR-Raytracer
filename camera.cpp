@@ -60,7 +60,7 @@ void Camera::raytrace(World *world) {
                 PointLight *pl = world->pointLights->at(0);
                 float nDotL = glm::dot(i->surfaceNormal, glm::normalize((pl->position - i->intersectionPoint)));
                 if(nDotL < 0.0) nDotL = 0.0;
-                color->setColor(i->color * nDotL);
+                color->setColor(i->color * (nDotL + world->ambientColor.r));
                 outputImage->setPixel(x, y, color);
             } else {
                 outputImage->setPixel(x, y, &world->backgroundColor);

@@ -24,7 +24,7 @@ public:
     glm::mat4 getWorldToLocal() const;
     void setWorldToLocal(const glm::mat4 &value);
     
-private:   
+protected:   
     glm::mat4 localToWorld, worldToLocal;
 };
 

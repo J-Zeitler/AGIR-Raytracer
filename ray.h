@@ -12,8 +12,9 @@ public:
 
     glm::vec3 operator() (const float &t);
     
-    glm::vec3 origin, dir;
+    glm::vec3 origin, dir, invdir;
     float tMin, tMax;
+    bool sign[3];
     
     friend std::ostream& operator<<(std::ostream &os, const Ray &r);
 };

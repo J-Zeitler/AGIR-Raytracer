@@ -20,3 +20,7 @@ void ColorRGB::setColor(ColorRGB c) {
 ColorRGB ColorRGB::operator*(float f) {
     return ColorRGB(r * f, g * f, b * f);
 }
+
+ColorRGB ColorRGB::operator+(ColorRGB &c) {
+    return ColorRGB(r + c.r, g + c.g, b + c.b);
+}
