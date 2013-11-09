@@ -7,7 +7,7 @@
 class PointLight
 {
 public:
-    PointLight();
+    PointLight(glm::vec3 p, ColorRGB c = ColorRGB(1, 1, 1));
     
     glm::vec3 position;
     ColorRGB color;

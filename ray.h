@@ -8,7 +8,7 @@ class Ray
 {
 public:
     Ray();
-    Ray(glm::vec3 o, glm::vec3 d, float near = -1, float far = -100);
+    Ray(glm::vec3 o, glm::vec3 d, float near = 1, float far = 100);
 
     glm::vec3 operator() (const float &t);
     

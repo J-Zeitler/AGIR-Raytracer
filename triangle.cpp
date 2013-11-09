@@ -37,7 +37,7 @@ void Triangle::_calculateEdges() {
 Intersection* Triangle::intersects(Ray &r) {
     
     /*************************************
-     * TODO Möller-Trumbore algorithm
+     * Möller-Trumbore algorithm
      *************************************/
     
     
@@ -46,13 +46,11 @@ Intersection* Triangle::intersects(Ray &r) {
     /*************************************
      * Straigt forward geometric solution
      *************************************/
-    glm::vec3 v = glm::normalize(glm::vec3(-6.0, 8.0, -45.0));
-    glm::vec3 u(-0.5, 0, 0.866025);
     
     glm::vec3 normal = (glm::dot(n, r.dir) < 0) ? n : (-1.0f * n); //double sided
     
     float den = glm::dot(normal, r.dir);
-    if(den < 0.00001 && den > -0.00001) return NULL; //triangle-plane || ray
+    if(den < 0.00000001 && den > -0.00000001) return NULL; //triangle-plane || ray
     
     float d = glm::dot(normal, v0);
     float num = - glm::dot(normal, r.origin) + d;
@@ -60,9 +58,9 @@ Intersection* Triangle::intersects(Ray &r) {
     
     if(t < 0) return NULL; //triangle behind ray
     
-    if(-t < r.tMax) return NULL; //another object in front
+    if(t > r.tMax) return NULL; //another object in front
     
-    glm::vec3 p = r(t); //hit point
+    glm::vec3 p = r(t-0.0001); //hit point (adjusted for numerical error)
     
     glm::vec3 c0 = p - v0;
     glm::vec3 c1 = p - v1;
@@ -73,14 +71,14 @@ Intersection* Triangle::intersects(Ray &r) {
         if( glm::dot(normal, glm::cross(-e0, c0)) > 0 &&
         glm::dot(normal, glm::cross(-e1, c1)) > 0 &&
         glm::dot(normal, glm::cross(-e2, c2)) > 0) {
-            r.tMax = -t;
+            r.tMax = t;
             return new Intersection(p, normal, color);
         }
     } else {
        if( glm::dot(n, glm::cross(e0, c0)) > 0 &&
         glm::dot(n, glm::cross(e1, c1)) > 0 &&
         glm::dot(n, glm::cross(e2, c2)) > 0) {
-            r.tMax = -t;
+            r.tMax = t;
             return new Intersection(p, n, color);
         }
     }

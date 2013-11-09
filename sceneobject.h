@@ -11,7 +11,7 @@ class SceneObject
 {
 public:
     SceneObject(const glm::mat4 &ltw, ColorRGB c);
-    ~SceneObject() {}
+    virtual ~SceneObject() {};
     
     virtual Intersection* intersects(Ray &r) = 0;
  

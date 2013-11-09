@@ -1,6 +1,6 @@
 #include "pointlight.h"
 
-PointLight::PointLight() {
-    position = glm::vec3(0, 7, -40);
-    color = ColorRGB(1, 1, 1);
+PointLight::PointLight(glm::vec3 p, ColorRGB c) {
+    position = p;
+    color = c;
 }

@@ -9,6 +9,13 @@ CornellBox::CornellBox() :
     _calculateGeometry();
 }
 
+CornellBox::~CornellBox() {
+	std::vector<Triangle*>::iterator it = triangles.begin();
+	do{
+		delete *it;
+	} while(it != triangles.end());
+}
+
 void CornellBox::_calculateGeometry() {
     
     v0 = glm::vec3(0, 0, 1);
@@ -54,7 +61,8 @@ Intersection *CornellBox::intersects(Ray &r) {
     Intersection *i = NULL, *tmp;
     
     for(int t = 0; t < triangles.size(); ++t) {
-        if( tmp = triangles.at(t)->intersects(r) ) {
+    	tmp = triangles.at(t)->intersects(r);
+        if( tmp ) {
             i = tmp;
         }
     }

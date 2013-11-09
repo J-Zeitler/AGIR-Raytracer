@@ -21,6 +21,11 @@ ColorRGB ColorRGB::operator*(float f) {
     return ColorRGB(r * f, g * f, b * f);
 }
 
-ColorRGB ColorRGB::operator+(ColorRGB &c) {
-    return ColorRGB(r + c.r, g + c.g, b + c.b);
+ColorRGB ColorRGB::operator+(ColorRGB c) {
+	ColorRGB res = ColorRGB(r + c.r, g + c.g, b + c.b);
+    return res;
+}
+ColorRGB ColorRGB::operator*(ColorRGB c) {
+	ColorRGB res = ColorRGB(r * c.r, g * c.g, b * c.b);
+    return res;
 }

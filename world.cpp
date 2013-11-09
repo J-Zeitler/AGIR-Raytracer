@@ -3,7 +3,7 @@
 World::World() {
     pointLights = new std::vector<PointLight*>();
     sceneObjects = new std::vector<SceneObject*>();
-    ambientColor = ColorRGB(0.1, 0.1, 0.1);
+    ambientColor = ColorRGB(0.02, 0.02, 0.02);
     backgroundColor = ColorRGB(0.1, 0.1, 0.1);
     backgroundEnabled = true;
 }

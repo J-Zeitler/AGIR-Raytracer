@@ -23,9 +23,8 @@ int main()
     World *world = new World();
     SceneObject *so;
     
-    //light source
-    so = new Sphere(glm::translate<float>(0, 7.0, -40.0), ColorRGB(1.0, 1.0, 1.0), 0.5);
-    world->addSceneObject(so);
+//     so = new Sphere(glm::translate<float>(4.0, 0.0, -45.0), ColorRGB(1.0, 1.0, 1.0), 1.0);
+//     world->addSceneObject(so);
     
     //some nice spheres
     so = new Sphere(glm::translate<float>(6.0, -7.0, -50.0), ColorRGB(1.0, 1.0, 1.0), 3.0);
@@ -50,15 +49,32 @@ int main()
         ColorRGB(1.0, 1.0, 0.0));
     world->addSceneObject(so);
     
+//     so = new Parallelepiped(
+//         glm::translate<float>(3.0, 0.0, -45.0),
+//         glm::vec3(0, 0, 0),
+//         glm::vec3(1, 0, 0),
+//         glm::vec3(0, 1, 0),
+//         glm::vec3(1, 1, 0),
+//         glm::vec3(0, 0, -1),
+//         glm::vec3(1, 0, -1),
+//         glm::vec3(0, 1, -1),
+//         glm::vec3(1, 1, -1),
+//         true,
+//         ColorRGB(1.0, 1.0, 1.0));
+//     world->addSceneObject(so);
+    
     so = new CornellBox();
     world->addSceneObject(so);
     
         
-    world->addPointLight(new PointLight());
+    world->addPointLight(new PointLight(glm::vec3(0, 6, -40), ColorRGB(0, 0, 0.5)));
+    world->addPointLight(new PointLight(glm::vec3(-5, -6, -44), ColorRGB(0.5, 0, 0)));
+    world->addPointLight(new PointLight(glm::vec3(4, -6, -40), ColorRGB(0, 0.5, 0)));
     
     Camera *cam = new Camera();
         
     cam->raytraceToFile(world, "./test.ppm");
 
+    std::cout << "Done" << std::endl;
     return 0;
 }

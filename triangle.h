@@ -10,7 +10,7 @@ class Triangle
 {
 public:
     Triangle(const glm::mat4 &ltw, glm::vec3 v0, glm::vec3 v1, glm::vec3 v2, ColorRGB c);
-    ~Triangle();
+    ~Triangle(){};
     
      Intersection* intersects(Ray &r);
     
